@@ -49,8 +49,10 @@ Lalu ubah `name` di `package.json` dan ganti isi `app/page.tsx`.
 3. Pasang Playwright MCP:
 
    ```
-   claude mcp add playwright -- npx @playwright/mcp@latest
+   claude mcp add -s user playwright -- cmd /c npx @playwright/mcp@latest
    ```
+
+   Di Windows, `cmd /c` diperlukan agar `npx` bisa dijalankan. Opsi `-s user` memasangnya sekali untuk semua proyek.
 
 4. Buka Claude Code di folder proyek. Setujui marketplace dan plugin `frontend-design` serta `ui-ux-pro-max` saat diminta (sudah diatur di `.claude/settings.json`), dan setujui server MCP `21st`.
 5. Jalankan `npm run dev`.
