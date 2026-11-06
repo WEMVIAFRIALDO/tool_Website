@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# hasil screenshot Playwright MCP
+.playwright-mcp/
+
+# pengaturan Claude Code lokal (pribadi)
+.claude/settings.local.json
+
+# rahasia: .env* sudah dikecualikan di atas; tambahan lain
+*.key
+secrets.*

@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+﻿# Starter Template Frontend
 
-## Getting Started
+Template Next.js (App Router, TypeScript, Tailwind 4) untuk proyek frontend berikutnya, lengkap dengan animasi, scroll halus, registry komponen, dan pengaturan Claude Code.
 
-First, run the development server:
+## Tools dan kegunaannya
+
+| Tool | Kegunaan |
+| --- | --- |
+| Next.js 16 + React 19 | Kerangka aplikasi |
+| Tailwind CSS 4 | Styling berbasis utility dan token CSS variable |
+| motion (`motion/react`) | Animasi komponen |
+| Lenis | Scroll halus, sinkron dengan motion, menghormati `prefers-reduced-motion` |
+| shadcn (`components.json`) | CLI untuk memasang komponen ke `components/` |
+| Magic UI (`@magicui`) | Registry komponen animasi |
+| React Bits (`@react-bits`) | Registry komponen dan efek visual |
+| lucide-react, clsx, tailwind-merge, cva | Ikon dan helper `cn()` untuk class |
+| MCP 21st | Mencari dan mengambil komponen dari 21st.dev lewat Claude Code |
+| Playwright MCP | Claude membuka browser untuk memeriksa tampilan |
+| Plugin `frontend-design` | Panduan desain visual yang tidak generik |
+| Plugin `ui-ux-pro-max` | Pembuatan design system dan panduan UI/UX |
+
+Aturan kerja untuk Claude ada di `CLAUDE.md`.
+
+## Membuat proyek baru dari template ini
+
+Opsi 1, lewat GitHub: buka repo template, klik **Use this template** (aktifkan dulu di Settings > Template repository), lalu clone repo baru.
+
+Opsi 2, lewat terminal:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/WEMVIAFRIALDO/tool_Website.git nama-proyek
+cd nama-proyek
+rm -rf .git && git init   # PowerShell: Remove-Item -Recurse -Force .git; git init
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Lalu ubah `name` di `package.json` dan ganti isi `app/page.tsx`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Pasang dependensi: `npm install`
+2. Simpan API key 21st sebagai environment variable (Windows PowerShell atau CMD), lalu **tutup dan buka ulang terminal serta Claude Code**:
 
-## Learn More
+   ```
+   setx API_KEY_21ST "isi-key-anda"
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+   Key dibaca `.mcp.json` lewat `${API_KEY_21ST}`. Jangan menuliskannya di file mana pun.
+3. Pasang Playwright MCP:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```
+   claude mcp add playwright -- npx @playwright/mcp@latest
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. Buka Claude Code di folder proyek. Setujui marketplace dan plugin `frontend-design` serta `ui-ux-pro-max` saat diminta (sudah diatur di `.claude/settings.json`), dan setujui server MCP `21st`.
+5. Jalankan `npm run dev`.
 
-## Deploy on Vercel
+## Memasang komponen
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npx shadcn add @magicui/marquee
+npx shadcn add @react-bits/blur-text
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Periksa impor animasi pada komponen React Bits dan sesuaikan ke `motion/react`.
+
+## Skrip
+
+- `npm run dev` menjalankan server pengembangan
+- `npm run build` build produksi
+- `npm run lint` pemeriksaan ESLint
